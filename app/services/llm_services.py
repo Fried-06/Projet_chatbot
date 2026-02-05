@@ -5,7 +5,7 @@ from app.core.config import settings
 genai.configure(api_key=settings.GEMINI_API_KEY)
 
 def generate_response(user_message: str) -> str:
-    """Génère une réponse en utilisant l'historique de conversation"""
+    
     try:
         add_message("user", user_message)
         
