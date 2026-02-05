@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+        .assistant {
+            background-color: #e9ecef;
+            color: black;
+        }
+        #input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #send-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>💬 Chatbot Gemini</h1>
+    <div id="chat-container"></div>
+    <div id="input-container">
+        <input type="text" id="message-input" placeholder="Tapez votre message...">
+        <button id="send-button">Envoyer</button>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        function addMessage(text, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            messageInput.value = '';
+
+            try {
+                const response = await fetch('http://localhost:8000/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+                addMessage(data.response, false);
+            } catch (error) {
+                addMessage('Erreur : Impossible de contacter le serveur', false);
+            }
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
