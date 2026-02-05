@@ -1,13 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from app.models.schema import ChatRequest, ChatResponse
-from app.services.llm_services import generate_response  # ✅ Utiliser generate_response
+from app.services.llm_services import generate_response  
 
 router = APIRouter()
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
     try:
-        # ✅ Utiliser generate_response au lieu de call_gemini_api
         response_text = generate_response(request.message)
         return ChatResponse(response=response_text)
     except Exception as e:
