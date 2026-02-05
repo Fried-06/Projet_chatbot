@@ -55,8 +55,8 @@ Ce projet est un chatbot conversationnel intelligent qui utilise l'API Google Ge
 ### 1. Cloner le repository
 
 ```bash
-git clone https://github.com/votre-username/chatbot-gemini-fastapi.git
-cd chatbot-gemini-fastapi
+git clone https://github.com/Fried-06/Projet_chatbot.git
+cd Projet_chatbot
 ```
 
 ### 2. Créer un environnement virtuel
