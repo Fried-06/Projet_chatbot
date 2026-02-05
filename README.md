@@ -8,21 +8,6 @@ Un chatbot intelligent propulsé par Google Gemini AI avec une API REST construi
 ![Gemini](https://img.shields.io/badge/Google-Gemini%20AI-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## 📋 Table des matières
-
-- [Aperçu](#aperçu)
-- [Fonctionnalités](#fonctionnalités)
-- [Architecture](#architecture)
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Utilisation](#utilisation)
-- [API Documentation](#api-documentation)
-- [Structure du projet](#structure-du-projet)
-- [Technologies utilisées](#technologies-utilisées)
-- [Contribution](#contribution)
-- [License](#license)
-
 ## 🎯 Aperçu
 
 Ce projet est un chatbot conversationnel intelligent qui utilise l'API Google Gemini pour générer des réponses contextuelles. Il comprend :
