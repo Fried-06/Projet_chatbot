@@ -12,7 +12,7 @@ app.add_middleware(
     allow_headers=["*"],
 )   
 
-app.include_router(chat.router, prefix="/api")
+app.include_router(chat.router)
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Chatbot API"}

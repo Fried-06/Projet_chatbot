@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from app.models.schema import ChatRequest, ChatResponse
 from app.services.llm_services import generate_response  
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
