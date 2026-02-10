@@ -11,7 +11,7 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     nom = Column(String)
     prenom = Column(String)
-    hashed_password = Column(String)
+    password = Column(String, nullable=False)
 
     Conversations = relationship("Conversation", back_populates="user")
 

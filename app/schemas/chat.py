@@ -14,7 +14,7 @@ class ChatResponse(BaseModel):
     response: str   
 
 class UserCreate(BaseModel):
-    usermane: str = Field(..., min_length=3, max_length=50, description="The user's username, must be between 3 and 50 characters long.")
+    username: str = Field(..., min_length=3, max_length=50, description="The user's username, must be between 3 and 50 characters long.")
     nom : str = Field(..., min_length=1, max_length=100, description="The user's full name.")
     prenom : str = Field(..., min_length=1, max_length=100, description="The user's full name.")
     email: EmailStr
