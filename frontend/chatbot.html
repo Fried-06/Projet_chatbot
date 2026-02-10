@@ -795,7 +795,6 @@
                 userId = 1; 
             }
 
-            // Nettoyage du nom pour l'affichage (si c'est un email)
             let displayName = userValue.includes('@') ? userValue.split('@')[0] : userValue;
             
             localStorage.setItem('rk_token', token);
