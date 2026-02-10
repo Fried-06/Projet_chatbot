@@ -21,8 +21,8 @@ def register_user(db: Session, username: str,nom:str, prenom:str, email: str, pa
     db.refresh(user)
     return user
 
-def login_user(db: Session, email: str, password: str):
-    user = db.query(User).filter(User.email == email).first()
+def login_user(db: Session, username: str, password: str):
+    user = db.query(User).filter(User.username==username).first()
     if not user or not verify_password(password, user.password):
         raise HTTPException(status_code=401, detail="Email ou mot de passe incorrect")
     

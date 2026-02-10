@@ -21,7 +21,7 @@ class UserCreate(BaseModel):
     password: str = Field(..., min_length=6, description="The user's password, must be at least 6 characters long.")
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    username: str = Field(..., min_length=3, max_length=50, description="The user's username, must be between 3 and 50 characters long.")
     password: str = Field(..., min_length=6, description="The user's password, must be at least 6 characters long.")
 
 

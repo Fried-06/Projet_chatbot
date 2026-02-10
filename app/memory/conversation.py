@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.models import Conversation
 
+
 def add_message(db: Session, user_id: int, role: str, content: str):
     message = Conversation(
         user_id=user_id,

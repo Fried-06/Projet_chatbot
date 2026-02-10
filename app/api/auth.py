@@ -12,4 +12,4 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token)
 def login(user: UserLogin, db: Session = Depends(get_db)):
-    return login_user(db, user.email, user.password)
+    return login_user(db, user.username, user.password)
