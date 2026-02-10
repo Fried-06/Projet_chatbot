@@ -1,13 +1,15 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from app.schemas.chat import ChatRequest, ChatResponse
 from app.services.llm_services import generate_response  
+from app.bd.database import get_db
+from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/api")
 
 @router.post("/chat", response_model=ChatResponse)
-async def chat_endpoint(request: ChatRequest):
+async def chat_endpoint(request: ChatRequest, db: Session = Depends(get_db)):
     try:
-        response_text = generate_response(request.message)
+        response_text = generate_response(db, request.user_id, request.message)
         return ChatResponse(response=response_text)
     except Exception as e:
         print(f"ERREUR DETECTEE : {e}")
