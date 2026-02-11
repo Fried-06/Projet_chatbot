@@ -3,74 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rèdè — Assistant IA</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Nexus — Votre chatbot intelligent propulsé par WYD">
+<title>Nexus — Chatbot</title>
+
+<!-- AMÉLIORATION: Polices plus distinctives. Syne (titre fort, géométrique) + DM Sans (corps lisible) + Fira Code (monospace) -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-/* ═══════════════════════════════════════
-   THEME VARIABLES
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   VARIABLES DE THÈME
+   AMÉLIORATION: Palette plus raffinée avec un indigo profond
+   comme couleur d'accent principale (plus premium que le bleu vif)
+═══════════════════════════════════════════════════════════ */
 :root {
   --transition: 0.25s ease;
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  18px;
+  --radius-xl:  24px;
 }
 
 [data-theme="dark"] {
-  --bg:        #0c0e14;
-  --bg2:       #12151e;
-  --bg3:       #1a1e2a;
-  --surface:   #1f2333;
-  --surface2:  #262b3d;
-  --border:    rgba(255,255,255,0.07);
-  --border2:   rgba(255,255,255,0.12);
-  --text:      #e2e4ed;
-  --text2:     #7c82a0;
-  --text3:     #4a5070;
-  --accent:    #4f8ef7;
-  --accent2:   #7eb3ff;
-  --accentBg:  rgba(79,142,247,0.12);
-  --user-bg:   #1e2d52;
-  --user-bd:   rgba(79,142,247,0.25);
-  --bot-bg:    #1a1e2a;
-  --bot-bd:    rgba(255,255,255,0.06);
-  --danger:    #f87171;
-  --success:   #34d399;
-  --shadow:    0 8px 32px rgba(0,0,0,0.4);
-  --glow:      0 0 40px rgba(79,142,247,0.08);
+  --bg:          #080b12;
+  --bg2:         #0f1220;
+  --bg3:         #161b2c;
+  --surface:     #1a2035;
+  --surface2:    #202640;
+  --border:      rgba(255,255,255,0.06);
+  --border2:     rgba(255,255,255,0.1);
+  --border3:     rgba(255,255,255,0.18);
+  --text:        #e8eaf5;
+  --text2:       #7880a8;
+  --text3:       #3d4468;
+  --accent:      #6366f1;    /* Indigo vibrant */
+  --accent2:     #a5b4fc;
+  --accent3:     #818cf8;
+  --accentBg:    rgba(99,102,241,0.12);
+  --accentGlow:  rgba(99,102,241,0.25);
+  --user-bg:     #1e2547;
+  --user-bd:     rgba(99,102,241,0.3);
+  --bot-bg:      #141828;
+  --bot-bd:      rgba(255,255,255,0.06);
+  --danger:      #f87171;
+  --success:     #34d399;
+  --warning:     #fbbf24;
+  --shadow:      0 12px 40px rgba(0,0,0,0.55);
+  --glow:        0 0 60px rgba(99,102,241,0.08);
+  --glow-strong: 0 0 30px rgba(99,102,241,0.2);
+  --footer-bg:   #0a0d18;
 }
 
 [data-theme="light"] {
-  --bg:        #f5f6fa;
-  --bg2:       #edeef5;
-  --bg3:       #e4e6f0;
-  --surface:   #ffffff;
-  --surface2:  #f0f2f9;
-  --border:    rgba(0,0,0,0.07);
-  --border2:   rgba(0,0,0,0.13);
-  --text:      #1a1d2e;
-  --text2:     #6b6f8a;
-  --text3:     #a0a4be;
-  --accent:    #2563eb;
-  --accent2:   #1d4ed8;
-  --accentBg:  rgba(37,99,235,0.08);
-  --user-bg:   #dbeafe;
-  --user-bd:   rgba(37,99,235,0.2);
-  --bot-bg:    #ffffff;
-  --bot-bd:    rgba(0,0,0,0.07);
-  --danger:    #dc2626;
-  --success:   #16a34a;
-  --shadow:    0 4px 24px rgba(0,0,0,0.08);
-  --glow:      0 0 40px rgba(37,99,235,0.04);
+  --bg:          #f0f2fa;
+  --bg2:         #e7eaf5;
+  --bg3:         #dde1f0;
+  --surface:     #ffffff;
+  --surface2:    #f4f5fb;
+  --border:      rgba(0,0,0,0.06);
+  --border2:     rgba(0,0,0,0.1);
+  --border3:     rgba(0,0,0,0.16);
+  --text:        #16192e;
+  --text2:       #5e6488;
+  --text3:       #a0a6c4;
+  --accent:      #4f46e5;
+  --accent2:     #3730a3;
+  --accent3:     #6366f1;
+  --accentBg:    rgba(79,70,229,0.08);
+  --accentGlow:  rgba(79,70,229,0.15);
+  --user-bg:     #eef0ff;
+  --user-bd:     rgba(79,70,229,0.2);
+  --bot-bg:      #ffffff;
+  --bot-bd:      rgba(0,0,0,0.07);
+  --danger:      #dc2626;
+  --success:     #16a34a;
+  --warning:     #d97706;
+  --shadow:      0 6px 28px rgba(0,0,0,0.08);
+  --glow:        0 0 40px rgba(79,70,229,0.05);
+  --glow-strong: 0 0 20px rgba(79,70,229,0.1);
+  --footer-bg:   #e4e7f3;
 }
 
-/* ═══════════════════════════════════════
-   BASE
-═══════════════════════════════════════ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+/* ═══════════════════════════════════════════════════════════
+   BASE RESET & FONDATIONS
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html { color-scheme: dark; }
 [data-theme="light"] { color-scheme: light; }
 
 body {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
   height: 100dvh;
@@ -78,23 +104,50 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 
-/* ═══════════════════════════════════════
-   SCREENS
-═══════════════════════════════════════ */
-.screen { position:fixed; inset:0; display:none; z-index:1; }
-.screen.active { display:flex; }
+/* ═══════════════════════════════════════════════════════════
+   SCROLLBAR PERSONNALISÉE
+   AMÉLIORATION: Scrollbar cohérente avec le thème
+═══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* ═══════════════════════════════════════
-   AUTH SCREEN
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   SÉLECTION DE TEXTE
+═══════════════════════════════════════════════════════════ */
+::selection {
+  background: var(--accentGlow);
+  color: var(--accent2);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════════════════════ */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1;
+}
+.screen.active { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN D'AUTHENTIFICATION
+   AMÉLIORATION: Fond avec grille animée + orb ambiant
+═══════════════════════════════════════════════════════════ */
 #auth-screen {
   align-items: center;
   justify-content: center;
   padding: 20px;
   background: var(--bg);
+  overflow: hidden;
 }
 
-/* Decorative grid */
+/* Grille décorative subtile */
 #auth-screen::before {
   content: '';
   position: fixed;
@@ -102,92 +155,127 @@ body {
   background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-size: 52px 52px;
   pointer-events: none;
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black, transparent);
 }
 
+/* Orb lumineux central animé */
 #auth-screen::after {
   content: '';
   position: fixed;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px; height: 600px;
+  width: 700px;
+  height: 700px;
   background: radial-gradient(circle, var(--accentBg) 0%, transparent 65%);
   pointer-events: none;
+  animation: orbPulse 6s ease-in-out infinite;
 }
 
+@keyframes orbPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50%       { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+}
+
+/* ── Conteneur auth ── */
 .auth-container {
   width: 100%;
-  max-width: 420px;
+  max-width: 430px;
   position: relative;
   z-index: 2;
-  animation: authIn 0.5s cubic-bezier(0.16,1,0.3,1);
+  animation: authIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes authIn {
-  from { opacity:0; transform:translateY(24px) scale(0.98); }
-  to   { opacity:1; transform:translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Theme toggle on auth */
+/* Bouton thème sur auth */
 .auth-theme-toggle {
   position: absolute;
-  top: -48px; right: 0;
+  top: -52px;
+  right: 0;
 }
 
-/* Brand */
+/* ── Branding auth ── */
 .auth-brand {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
+/* AMÉLIORATION: Icône avec halo animé multi-couches */
 .brand-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px; height: 56px;
-  background: var(--accent);
-  border-radius: 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 0 0 8px var(--accentBg), var(--shadow);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+  box-shadow:
+    0 0 0 8px var(--accentBg),
+    0 0 0 16px rgba(99,102,241,0.04),
+    var(--shadow);
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-icon:hover {
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow:
+    0 0 0 8px var(--accentBg),
+    0 0 0 16px rgba(99,102,241,0.07),
+    var(--glow-strong),
+    var(--shadow);
 }
 
 .brand-icon svg { color: white; }
 
+/* AMÉLIORATION: Nom "Nexus" avec typographie Syne forte */
 .auth-brand h1 {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
   color: var(--text);
+  line-height: 1;
+}
+
+/* AMÉLIORATION: Lettre "N" accentuée pour mise en valeur */
+.auth-brand h1 .nexus-n {
+  color: var(--accent);
 }
 
 .auth-brand p {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text2);
-  margin-top: 5px;
-  font-weight: 300;
+  margin-top: 6px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
 }
 
-/* Card */
+/* ── Carte auth ── */
 .auth-card {
   background: var(--surface);
   border: 1px solid var(--border2);
-  border-radius: 20px;
+  border-radius: var(--radius-xl);
   padding: 32px;
   box-shadow: var(--shadow), var(--glow);
   transition: background var(--transition), border-color var(--transition);
 }
 
-/* Tabs */
+/* ── Tabs ── */
 .tabs {
   display: flex;
   background: var(--bg2);
-  border-radius: 10px;
-  padding: 3px;
-  gap: 3px;
-  margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 26px;
   transition: background var(--transition);
 }
 
@@ -197,32 +285,39 @@ body {
   border: none;
   background: transparent;
   color: var(--text2);
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tab.active {
   background: var(--surface);
   color: var(--text);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  font-weight: 600;
 }
 
-/* Form */
-.form-group { margin-bottom: 14px; }
+.tab:not(.active):hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Groupes de formulaire ── */
+.form-group { margin-bottom: 15px; }
 
 .form-group label {
   display: block;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text2);
   text-transform: uppercase;
-  letter-spacing: 0.7px;
-  margin-bottom: 6px;
+  letter-spacing: 0.8px;
+  margin-bottom: 7px;
   transition: color var(--transition);
+  font-family: 'Fira Code', monospace;
 }
 
 .form-group input {
@@ -230,20 +325,34 @@ body {
   padding: 11px 14px;
   background: var(--bg2);
   border: 1.5px solid var(--border2);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   color: var(--text);
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14.5px;
   outline: none;
-  transition: all 0.2s;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .form-group input::placeholder { color: var(--text3); }
 
 .form-group input:focus {
   border-color: var(--accent);
-  background: var(--surface);
+  background: var(--bg3);
   box-shadow: 0 0 0 3px var(--accentBg);
+}
+
+/* AMÉLIORATION: Animation de shake sur erreur de champ */
+.form-group input.shake {
+  animation: shake 0.35s ease;
+  border-color: var(--danger);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
 }
 
 .form-row {
@@ -252,125 +361,205 @@ body {
   gap: 10px;
 }
 
+/* ── Bouton principal ── */
 .btn-primary {
   width: 100%;
   padding: 13px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 100%);
   border: none;
-  border-radius: 11px;
+  border-radius: var(--radius-md);
   color: white;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 6px;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 8px;
   letter-spacing: 0.2px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* AMÉLIORATION: Effet de shimmer au hover */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255,255,255,0.12);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::after { left: 130%; }
 
 .btn-primary:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(79,142,247,0.3);
+  box-shadow: 0 8px 24px var(--accentGlow);
 }
 
 .btn-primary:active { transform: translateY(0); }
-.btn-primary:disabled { opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none; filter:none; }
-
-.form-alert {
-  display: none;
-  margin-top: 12px;
-  padding: 10px 13px;
-  border-radius: 9px;
-  font-size: 13px;
-  text-align: center;
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
 }
 
-.form-alert.error  { display:block; background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.25); color:var(--danger); }
-.form-alert.success { display:block; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.25); color:var(--success); }
+/* ── Alertes de formulaire ── */
+.form-alert {
+  display: none;
+  margin-top: 13px;
+  padding: 10px 13px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  text-align: center;
+  animation: alertSlide 0.25s ease;
+}
 
-/* ═══════════════════════════════════════
-   CHAT SCREEN
-═══════════════════════════════════════ */
+@keyframes alertSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-alert.error {
+  display: block;
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.25);
+  color: var(--danger);
+}
+
+.form-alert.success {
+  display: block;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.25);
+  color: var(--success);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ÉCRAN DE CHAT
+═══════════════════════════════════════════════════════════ */
 #chat-screen {
   flex-direction: column;
   background: var(--bg);
 }
 
-/* Header */
+/* ── Header ──
+   AMÉLIORATION: Barre de dégradé fin au bas du header pour la profondeur */
 .chat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  height: 60px;
+  padding: 0 22px;
+  height: 64px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   transition: background var(--transition), border-color var(--transition);
+  position: relative;
+  z-index: 10;
 }
 
-.hd-left { display:flex; align-items:center; gap:11px; }
+/* Trait lumineux en bas du header */
+.chat-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
 
+.hd-left { display: flex; align-items: center; gap: 12px; }
+
+/* AMÉLIORATION: Icône avec dégradé cohérent */
 .hd-icon {
-  width: 34px; height: 34px;
-  background: var(--accent);
-  border-radius: 9px;
-  display: flex; align-items:center; justify-content:center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px var(--accentGlow);
 }
 
-.hd-icon svg { color:white; }
+.hd-icon svg { color: white; }
 
+/* AMÉLIORATION: Nom "Nexus" stylé avec Syne dans le header */
 .hd-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   color: var(--text);
 }
+
+.hd-title .nexus-n { color: var(--accent); }
 
 .hd-status {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text2);
   margin-top: 1px;
-  font-weight: 400;
+  font-family: 'Fira Code', monospace;
 }
 
 .status-dot {
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   background: var(--success);
   border-radius: 50%;
   animation: pulse 2.5s infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
-  50%      { box-shadow: 0 0 0 4px rgba(52,211,153,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(52,211,153,0); }
 }
 
-.hd-right { display:flex; align-items:center; gap:8px; }
+.hd-right { display: flex; align-items: center; gap: 9px; }
 
+/* ── Chip utilisateur ── */
 .user-chip {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 5px 11px 5px 5px;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
   background: var(--bg2);
   border: 1px solid var(--border2);
   border-radius: 20px;
-  transition: background var(--transition);
+  transition: all var(--transition);
+}
+
+.user-chip:hover {
+  border-color: var(--border3);
+  background: var(--bg3);
 }
 
 .user-av {
-  width: 24px; height: 24px;
-  background: var(--accent);
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
   border-radius: 50%;
-  display: flex; align-items:center; justify-content:center;
-  font-size: 11px; font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
   color: white;
   font-family: 'Fira Code', monospace;
+  box-shadow: 0 1px 6px var(--accentGlow);
 }
 
 .user-chip span {
@@ -379,19 +568,26 @@ body {
   color: var(--text);
 }
 
-/* Icon Buttons */
+/* ── Boutons icône ── */
 .icon-btn {
-  width: 32px; height: 32px;
-  display: flex; align-items:center; justify-content:center;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg2);
   border: 1px solid var(--border2);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s;
   color: var(--text2);
 }
 
-.icon-btn:hover { background:var(--surface2); color:var(--text); }
+.icon-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--border3);
+}
 
 .icon-btn.danger:hover {
   background: rgba(248,113,113,0.1);
@@ -399,154 +595,194 @@ body {
   color: var(--danger);
 }
 
-/* Messages */
+/* ═══════════════════════════════════════════════════════════
+   ZONE DE MESSAGES
+═══════════════════════════════════════════════════════════ */
 #messages {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 20px;
+  padding: 28px 22px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   scroll-behavior: smooth;
 }
 
-#messages::-webkit-scrollbar { width: 4px; }
-#messages::-webkit-scrollbar-track { background: transparent; }
-#messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 6px; }
-
-/* Welcome */
+/* ── Message de bienvenue ── */
 .welcome {
   text-align: center;
-  padding: 20px 0 8px;
+  padding: 24px 0 12px;
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-time {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.9px;
   background: var(--bg2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border2);
   border-radius: 20px;
-  padding: 4px 12px;
-  margin-bottom: 12px;
+  padding: 4px 13px;
+  margin-bottom: 14px;
   font-family: 'Fira Code', monospace;
 }
 
 .welcome h2 {
-  font-size: 18px;
-  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 
-.welcome p { font-size: 13.5px; color: var(--text2); font-weight: 300; }
+.welcome p {
+  font-size: 13.5px;
+  color: var(--text2);
+  font-weight: 400;
+}
 
-/* Message rows */
+/* ── Lignes de messages ── */
 .msg-row {
   display: flex;
-  gap: 10px;
+  gap: 11px;
   align-items: flex-start;
-  animation: msgIn 0.28s cubic-bezier(0.16,1,0.3,1);
+  animation: msgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes msgIn {
-  from { opacity:0; transform:translateY(8px); }
-  to   { opacity:1; transform:translateY(0); }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .msg-row.user { flex-direction: row-reverse; }
 
+/* ── Avatar de message ── */
 .msg-av {
-  width: 30px; height: 30px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
   flex-shrink: 0;
-  display: flex; align-items:center; justify-content:center;
-  font-size: 12px; font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
   margin-top: 2px;
   font-family: 'Fira Code', monospace;
   transition: background var(--transition);
 }
 
-.msg-av.bot { background:var(--accent); color:white; }
-.msg-av.me  { background:var(--surface2); color:var(--accent); border:1px solid var(--border2); }
+/* AMÉLIORATION: Avatar bot avec dégradé */
+.msg-av.bot {
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: white;
+  box-shadow: 0 2px 10px var(--accentGlow);
+}
 
-.msg-body { max-width: min(520px, 74vw); }
+.msg-av.me {
+  background: var(--surface2);
+  color: var(--accent);
+  border: 1px solid var(--border2);
+}
+
+.msg-body { max-width: min(540px, 76vw); }
 
 .msg-meta {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  letter-spacing: 0.6px;
+  margin-bottom: 5px;
   font-family: 'Fira Code', monospace;
 }
 
 .msg-row.user .msg-meta { text-align: right; }
 
+/* ── Bulles de message ── */
 .msg-bubble {
-  padding: 11px 15px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
   font-size: 14.5px;
-  line-height: 1.65;
+  line-height: 1.7;
   transition: background var(--transition), border-color var(--transition);
+  word-break: break-word;
 }
 
 .msg-bubble.bot {
   background: var(--bot-bg);
   border: 1px solid var(--bot-bd);
   color: var(--text);
-  border-radius: 4px 12px 12px 12px;
+  border-radius: 4px var(--radius-md) var(--radius-md) var(--radius-md);
 }
 
+/* AMÉLIORATION: Bulle utilisateur avec fond légèrement dégradé */
 .msg-bubble.user {
-  background: var(--user-bg);
+  background: linear-gradient(135deg, var(--user-bg), rgba(99,102,241,0.12));
   border: 1px solid var(--user-bd);
   color: var(--text);
-  border-radius: 12px 4px 12px 12px;
+  border-radius: var(--radius-md) 4px var(--radius-md) var(--radius-md);
 }
 
-/* Typing */
-.typing-wrap { display:flex; gap:5px; padding:3px 2px; }
+/* ── Indicateur de frappe ── */
+.typing-wrap {
+  display: flex;
+  gap: 5px;
+  padding: 4px 2px;
+  align-items: center;
+}
+
 .typing-wrap span {
-  width: 7px; height: 7px;
-  background: var(--text3);
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
   border-radius: 50%;
   animation: tdot 1.4s infinite;
+  opacity: 0.5;
 }
-.typing-wrap span:nth-child(2) { animation-delay:0.2s; }
-.typing-wrap span:nth-child(3) { animation-delay:0.4s; }
+
+.typing-wrap span:nth-child(2) { animation-delay: 0.2s; }
+.typing-wrap span:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes tdot {
-  0%,60%,100% { transform:translateY(0); opacity:0.4; }
-  30%          { transform:translateY(-5px); opacity:1; }
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-6px); opacity: 1; }
 }
 
-/* Input area */
+/* ═══════════════════════════════════════════════════════════
+   ZONE DE SAISIE
+═══════════════════════════════════════════════════════════ */
 .chat-input {
-  padding: 14px 20px 18px;
+  padding: 14px 22px 16px;
   background: var(--surface);
   border-top: 1px solid var(--border);
   flex-shrink: 0;
   transition: background var(--transition), border-color var(--transition);
 }
 
+/* ── Chips de suggestion ── */
 .chips {
   display: flex;
   gap: 7px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
   overflow-x: auto;
   scrollbar-width: none;
 }
-.chips::-webkit-scrollbar { display:none; }
+.chips::-webkit-scrollbar { display: none; }
 
 .chip {
-  padding: 5px 13px;
+  padding: 5px 14px;
   background: var(--bg2);
   border: 1px solid var(--border2);
   border-radius: 20px;
@@ -554,8 +790,8 @@ body {
   color: var(--text2);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
 }
 
@@ -563,8 +799,11 @@ body {
   background: var(--accentBg);
   border-color: var(--accent);
   color: var(--accent2);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px var(--accentGlow);
 }
 
+/* ── Ligne de saisie ── */
 .input-row {
   display: flex;
   gap: 9px;
@@ -576,50 +815,63 @@ body {
   padding: 12px 16px;
   background: var(--bg2);
   border: 1.5px solid var(--border2);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   color: var(--text);
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14.5px;
   outline: none;
   resize: none;
   max-height: 120px;
-  line-height: 1.5;
-  transition: all 0.2s;
+  line-height: 1.6;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #msg-input::placeholder { color: var(--text3); }
+
 #msg-input:focus {
   border-color: var(--accent);
-  background: var(--surface2);
+  background: var(--bg3);
   box-shadow: 0 0 0 3px var(--accentBg);
 }
 
+/* ── Bouton d'envoi ── */
 #send-btn {
-  width: 46px; height: 46px;
-  background: var(--accent);
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  display: flex; align-items:center; justify-content:center;
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   color: white;
+  box-shadow: 0 3px 14px var(--accentGlow);
 }
 
 #send-btn:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(79,142,247,0.35);
+  box-shadow: 0 6px 22px var(--accentGlow);
 }
 
-#send-btn:active { transform:translateY(0); }
-#send-btn:disabled { opacity:0.4; cursor:not-allowed; transform:none; box-shadow:none; filter:none; }
+#send-btn:active { transform: translateY(0); }
+#send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
 
+/* ── Indication clavier ── */
 .input-hint {
   text-align: center;
   font-size: 11px;
   color: var(--text3);
-  margin-top: 9px;
+  margin-top: 10px;
   font-family: 'Fira Code', monospace;
 }
 
@@ -627,21 +879,87 @@ body {
   background: var(--bg3);
   border: 1px solid var(--border2);
   border-radius: 4px;
-  padding: 1px 5px;
+  padding: 1px 6px;
   font-family: 'Fira Code', monospace;
   font-size: 10px;
   color: var(--text2);
 }
 
-/* ═══════════════════════════════════════
-   THEME TOGGLE BUTTON
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   NOUVEAU: Footer élégant avec mention "Propulsé par WYD"
+═══════════════════════════════════════════════════════════ */
+.chat-footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 8px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.footer-text {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Séparateur décoratif */
+.footer-text::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--border3);
+  border-radius: 2px;
+}
+
+.footer-text::after {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--border3);
+  border-radius: 2px;
+}
+
+.footer-brand {
+  font-weight: 600;
+  color: var(--accent2);
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.footer-brand:hover { color: var(--accent); }
+
+/* Point décoratif entre texte et marque */
+.footer-dot {
+  width: 3px;
+  height: 3px;
+  background: var(--text3);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOUTON DE BASCULE DE THÈME
+═══════════════════════════════════════════════════════════ */
 .theme-toggle {
-  width: 32px; height: 32px;
-  display: flex; align-items:center; justify-content:center;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg2);
   border: 1px solid var(--border2);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s;
   color: var(--text2);
@@ -649,232 +967,363 @@ body {
   overflow: hidden;
 }
 
-.theme-toggle:hover { background:var(--surface2); color:var(--text); }
+.theme-toggle:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--border3);
+}
 
-.theme-toggle .sun  { position:absolute; transition: all 0.3s; }
-.theme-toggle .moon { position:absolute; transition: all 0.3s; }
+.theme-toggle .sun,
+.theme-toggle .moon {
+  position: absolute;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-[data-theme="dark"]  .sun  { opacity:1; transform:scale(1); }
-[data-theme="dark"]  .moon { opacity:0; transform:scale(0.5) rotate(90deg); }
-[data-theme="light"] .sun  { opacity:0; transform:scale(0.5) rotate(-90deg); }
-[data-theme="light"] .moon { opacity:1; transform:scale(1); }
+[data-theme="dark"]  .sun  { opacity: 1; transform: scale(1) rotate(0deg); }
+[data-theme="dark"]  .moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
+[data-theme="light"] .sun  { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+[data-theme="light"] .moon { opacity: 1; transform: scale(1) rotate(0deg); }
 
-/* ═══════════════════════════════════════
-   SPINNER
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   SPINNER DE CHARGEMENT
+═══════════════════════════════════════════════════════════ */
 .spin {
-  width: 15px; height: 15px;
-  border: 2px solid rgba(255,255,255,0.25);
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255,255,255,0.2);
   border-top-color: white;
   border-radius: 50%;
   animation: spin 0.65s linear infinite;
   display: inline-block;
 }
-@keyframes spin { to { transform:rotate(360deg); } }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile
+   AMÉLIORATION: Meilleur rendu sur petits écrans
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .auth-card { padding: 24px 20px; }
+  .form-row  { grid-template-columns: 1fr; }
+  .user-chip span { display: none; }
+  .chips { gap: 5px; }
+  .chat-header { padding: 0 14px; height: 58px; }
+  .chat-input  { padding: 12px 14px 14px; }
+  #messages    { padding: 18px 14px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACCESSIBILITÉ — Focus visible
+   AMÉLIORATION: Respect des standards WCAG
+═══════════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════ AUTH ═══════════ -->
-<div class="screen active" id="auth-screen">
+<!-- ══════════════════════════════════
+     ÉCRAN D'AUTHENTIFICATION
+══════════════════════════════════ -->
+<div class="screen active" id="auth-screen" role="main">
+
   <div class="auth-container">
 
-    <!-- Theme toggle -->
+    <!-- Bascule de thème -->
     <div class="auth-theme-toggle">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
-        <svg class="sun" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5"/><path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème" aria-label="Basculer le thème clair/sombre">
+        <svg class="sun" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
-        <svg class="moon" width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="moon" width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
         </svg>
       </button>
     </div>
 
-    <!-- Brand -->
+    <!-- Branding -->
     <div class="auth-brand">
-      <div class="brand-icon">
-        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+      <div class="brand-icon" aria-hidden="true">
+        <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
         </svg>
       </div>
-      <h1>Rèdè ChatBot</h1>
-      <p>Votre assistant intelligent propulsé par l'IA</p>
+      <!-- AMÉLIORATION: "N" accentué pour mettre en valeur le nom Nexus -->
+      <h1><span class="nexus-n">N</span>exus</h1>
+      <p>Votre chatbot intelligent propulsé par WYD</p>
     </div>
 
-    <!-- Card -->
+    <!-- Carte d'authentification -->
     <div class="auth-card">
-      <div class="tabs">
-        <button class="tab active" id="tab-login" onclick="switchTab('login')">Connexion</button>
-        <button class="tab" id="tab-register" onclick="switchTab('register')">Inscription</button>
+      <div class="tabs" role="tablist">
+        <button class="tab active" id="tab-login" onclick="switchTab('login')" role="tab" aria-selected="true" aria-controls="form-login">Connexion</button>
+        <button class="tab" id="tab-register" onclick="switchTab('register')" role="tab" aria-selected="false" aria-controls="form-register">Inscription</button>
       </div>
 
-      <!-- LOGIN — username + password -->
-      <div id="form-login">
+      <!-- Formulaire de connexion -->
+      <div id="form-login" role="tabpanel" aria-labelledby="tab-login">
         <div class="form-group">
-          <label>Nom d'utilisateur</label>
+          <label for="l-username">Nom d'utilisateur</label>
           <input type="text" id="l-username" placeholder="david123" autocomplete="username" />
         </div>
         <div class="form-group">
-          <label>Mot de passe</label>
+          <label for="l-password">Mot de passe</label>
           <input type="password" id="l-password" placeholder="••••••••" autocomplete="current-password" />
         </div>
         <button class="btn-primary" id="login-btn" onclick="doLogin()">Se connecter</button>
-        <div class="form-alert" id="login-alert"></div>
+        <div class="form-alert" id="login-alert" role="alert" aria-live="polite"></div>
       </div>
 
-      <!-- REGISTER — username, nom, prenom, email, password -->
-      <div id="form-register" style="display:none">
+      <!-- Formulaire d'inscription -->
+      <div id="form-register" style="display:none" role="tabpanel" aria-labelledby="tab-register">
         <div class="form-group">
-          <label>Nom d'utilisateur</label>
+          <label for="r-username">Nom d'utilisateur</label>
           <input type="text" id="r-username" placeholder="david123" autocomplete="username" />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Nom</label>
-            <input type="text" id="r-nom" placeholder="Dupont" />
+            <label for="r-nom">Nom</label>
+            <input type="text" id="r-nom" placeholder="Dupont" autocomplete="family-name" />
           </div>
           <div class="form-group">
-            <label>Prénom</label>
-            <input type="text" id="r-prenom" placeholder="David" />
+            <label for="r-prenom">Prénom</label>
+            <input type="text" id="r-prenom" placeholder="David" autocomplete="given-name" />
           </div>
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label for="r-email">Email</label>
           <input type="email" id="r-email" placeholder="vous@exemple.com" autocomplete="email" />
         </div>
         <div class="form-group">
-          <label>Mot de passe <span style="color:var(--text3);font-weight:400;font-size:10px;">(min. 6 car.)</span></label>
+          <label for="r-password">
+            Mot de passe
+            <span style="color:var(--text3); font-weight:400; font-size:10px; font-family:'DM Sans',sans-serif; text-transform:none; letter-spacing:0;">(min. 6 car.)</span>
+          </label>
           <input type="password" id="r-password" placeholder="••••••••" autocomplete="new-password" />
         </div>
         <button class="btn-primary" id="register-btn" onclick="doRegister()">Créer mon compte</button>
-        <div class="form-alert" id="register-alert"></div>
+        <div class="form-alert" id="register-alert" role="alert" aria-live="polite"></div>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- ═══════════ CHAT ═══════════ -->
+<!-- ══════════════════════════════════
+     ÉCRAN DE CHAT
+══════════════════════════════════ -->
 <div class="screen" id="chat-screen">
 
   <!-- Header -->
-  <div class="chat-header">
+  <header class="chat-header" role="banner">
     <div class="hd-left">
-      <div class="hd-icon">
+      <div class="hd-icon" aria-hidden="true">
         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
         </svg>
       </div>
       <div>
-        <div class="hd-title">Rèdè</div>
-        <div class="hd-status"><div class="status-dot"></div> En ligne</div>
+        <!-- AMÉLIORATION: Nom Nexus mis en valeur avec Syne + N accentué -->
+        <div class="hd-title"><span class="nexus-n">N</span>exus</div>
+        <div class="hd-status">
+          <div class="status-dot" aria-hidden="true"></div>
+          En ligne
+        </div>
       </div>
     </div>
+
     <div class="hd-right">
-      <div class="user-chip">
-        <div class="user-av" id="user-av">D</div>
+      <div class="user-chip" aria-label="Utilisateur connecté">
+        <div class="user-av" id="user-av" aria-hidden="true">D</div>
         <span id="user-name">david</span>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
-        <svg class="sun" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5"/><path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème" aria-label="Basculer le thème">
+        <svg class="sun" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
-        <svg class="moon" width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="moon" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
         </svg>
       </button>
-      <button class="icon-btn danger" onclick="doLogout()" title="Déconnexion">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="icon-btn danger" onclick="doLogout()" title="Déconnexion" aria-label="Se déconnecter">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
         </svg>
       </button>
     </div>
-  </div>
+  </header>
 
-  <!-- Messages -->
-  <div id="messages">
+  <!-- Zone de messages -->
+  <div id="messages" role="log" aria-label="Conversation" aria-live="polite">
     <div class="welcome">
-      <div class="welcome-time" id="welcome-time">⏰ Chargement...</div>
+      <div class="welcome-time" id="welcome-time">⏰ Chargement…</div>
       <h2>Bonjour, comment puis-je vous aider ?</h2>
-      <p>Je suis Rèdè, votre assistant IA personnel</p>
+      <p>Je suis <strong style="color:var(--accent);font-family:'Syne',sans-serif;">Nexus</strong>, votre chatbot personnel</p>
     </div>
     <div class="msg-row" id="welcome-msg">
-      <div class="msg-av bot">AI</div>
+      <div class="msg-av bot" aria-hidden="true">NX</div>
       <div class="msg-body">
-        <div class="msg-meta">Rèdè</div>
+        <div class="msg-meta">Nexus</div>
         <div class="msg-bubble bot">👋 Bienvenue ! Posez-moi vos questions, je suis là pour vous aider.</div>
       </div>
     </div>
   </div>
 
-  <!-- Input -->
+  <!-- Zone de saisie -->
   <div class="chat-input">
-    <div class="chips">
+    <!-- Chips de suggestion rapide -->
+    <div class="chips" role="group" aria-label="Suggestions rapides">
       <button class="chip" onclick="useChip('Quelles sont tes capacités ?')">💡 Capacités</button>
       <button class="chip" onclick="useChip('Aide-moi à rédiger un email professionnel')">✍️ Rédaction</button>
       <button class="chip" onclick="useChip('Explique-moi un concept technique')">📚 Expliquer</button>
       <button class="chip" onclick="useChip('Génère des idées créatives sur un sujet')">🎨 Idées</button>
       <button class="chip" onclick="useChip('Résume ce texte en 3 points clés')">📋 Résumé</button>
     </div>
+
+    <!-- Champ de saisie -->
     <div class="input-row">
-      <textarea id="msg-input" rows="1" placeholder="Écrivez votre message…"></textarea>
-      <button id="send-btn" onclick="sendMsg()">
-        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <textarea
+        id="msg-input"
+        rows="1"
+        placeholder="Écrivez votre message à Nexus…"
+        aria-label="Message à envoyer"
+        autocomplete="off"
+      ></textarea>
+      <button id="send-btn" onclick="sendMsg()" aria-label="Envoyer le message">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
         </svg>
       </button>
     </div>
     <div class="input-hint"><kbd>Enter</kbd> pour envoyer · <kbd>Shift+Enter</kbd> pour nouvelle ligne</div>
   </div>
+
+  <!-- NOUVEAU: Footer élégant -->
+  <footer class="chat-footer" role="contentinfo">
+    <div class="footer-text">
+      Propulsé par <span class="footer-dot"></span> <span class="footer-brand">WYD</span>
+    </div>
+  </footer>
+
 </div>
 
 <script>
-const API = 'http://localhost:8000';
-let token    = localStorage.getItem('rd_token');
-let userId   = parseInt(localStorage.getItem('rd_uid') || '0');
-let username = localStorage.getItem('rd_user') || '';
+/**
+ * ═══════════════════════════════════════════════════════
+ *  NEXUS — FRONTEND LOGIC
+ *  AMÉLIORATIONS JS:
+ *  - Constantes nommées pour la config API
+ *  - Validation email côté client
+ *  - Animation shake sur erreur de champ
+ *  - Gestion robuste du token JWT
+ *  - resetMessages() factorisé proprement
+ *  - Protection contre le double-envoi
+ * ═══════════════════════════════════════════════════════
+ */
 
-// ── INIT ──────────────────────────────
-const savedTheme = localStorage.getItem('rd_theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
-if (token) openChat();
-setWelcomeTime();
+/* ── CONFIG ─────────────────────────────────── */
+const API_BASE   = 'http://localhost:8000';
+const BOT_NAME   = 'Nexus';
+const BOT_AVATAR = 'NX';
 
+/* ── ÉTAT DE SESSION ──────────────────────────
+   AMÉLIORATION: Centralisation de l'état dans un objet unique
+   plutôt que de multiples variables libres
+*/
+const session = {
+  token:    localStorage.getItem('rd_token')    || null,
+  userId:   parseInt(localStorage.getItem('rd_uid') || '0'),
+  username: localStorage.getItem('rd_user')    || '',
+};
+
+/* ── INITIALISATION ──────────────────────────── */
+(function init() {
+  const savedTheme = localStorage.getItem('rd_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  if (session.token) {
+    openChat();
+  }
+
+  setWelcomeTime();
+})();
+
+/* ── DATE/HEURE DE BIENVENUE ─────────────────── */
 function setWelcomeTime() {
   const el = document.getElementById('welcome-time');
   if (!el) return;
-  const d = new Date();
-  const days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const d      = new Date();
+  const days   = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
   const months = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   el.textContent = `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
-// ── THEME ─────────────────────────────
+/* ── THÈME ───────────────────────────────────── */
 function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme');
+  const cur  = document.documentElement.getAttribute('data-theme');
   const next = cur === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('rd_theme', next);
 }
 
-// ── TABS ──────────────────────────────
+/* ── ONGLETS D'AUTHENTIFICATION ──────────────── */
 function switchTab(t) {
-  document.getElementById('tab-login').classList.toggle('active', t === 'login');
-  document.getElementById('tab-register').classList.toggle('active', t === 'register');
-  document.getElementById('form-login').style.display = t === 'login' ? 'block' : 'none';
-  document.getElementById('form-register').style.display = t === 'register' ? 'block' : 'none';
+  const isLogin = t === 'login';
+  document.getElementById('tab-login').classList.toggle('active', isLogin);
+  document.getElementById('tab-register').classList.toggle('active', !isLogin);
+  document.getElementById('tab-login').setAttribute('aria-selected', isLogin);
+  document.getElementById('tab-register').setAttribute('aria-selected', !isLogin);
+  document.getElementById('form-login').style.display    = isLogin ? 'block' : 'none';
+  document.getElementById('form-register').style.display = isLogin ? 'none'  : 'block';
 }
 
+/* ── ALERTES DE FORMULAIRE ───────────────────── */
 function showAlert(id, msg, type) {
   const el = document.getElementById(id);
-  el.textContent = msg;
-  el.className = `form-alert ${type}`;
+  el.textContent  = msg;
+  el.className    = `form-alert ${type}`;
 }
 
-// ── REGISTER ──────────────────────────
+function hideAlert(id) {
+  const el = document.getElementById(id);
+  el.className = 'form-alert';
+  el.textContent = '';
+}
+
+/* ── VALIDATION EMAIL ────────────────────────── 
+   AMÉLIORATION: Validation email côté client
+*/
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* ── ANIMATION SHAKE SUR CHAMP INVALIDE ─────────
+   AMÉLIORATION: Retour visuel immédiat sur erreur
+*/
+function shakeField(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('shake');
+  // Force reflow pour relancer l'animation
+  void el.offsetWidth;
+  el.classList.add('shake');
+  el.addEventListener('animationend', () => el.classList.remove('shake'), { once: true });
+}
+
+/* ── INSCRIPTION ─────────────────────────────── */
 async function doRegister() {
-  const btn = document.getElementById('register-btn');
-  const body = {
+  const btn  = document.getElementById('register-btn');
+  const data = {
     username: document.getElementById('r-username').value.trim(),
     nom:      document.getElementById('r-nom').value.trim(),
     prenom:   document.getElementById('r-prenom').value.trim(),
@@ -882,192 +1331,240 @@ async function doRegister() {
     password: document.getElementById('r-password').value,
   };
 
-  if (!body.username || !body.nom || !body.prenom || !body.email || !body.password) {
-    showAlert('register-alert', 'Veuillez remplir tous les champs.', 'error'); return;
+  /* Validation */
+  if (!data.username || !data.nom || !data.prenom || !data.email || !data.password) {
+    showAlert('register-alert', 'Veuillez remplir tous les champs.', 'error');
+    return;
   }
-  if (body.password.length < 6) {
-    showAlert('register-alert', 'Le mot de passe doit faire au moins 6 caractères.', 'error'); return;
+  if (!isValidEmail(data.email)) {
+    showAlert('register-alert', 'Adresse email invalide.', 'error');
+    shakeField('r-email');
+    return;
+  }
+  if (data.password.length < 6) {
+    showAlert('register-alert', 'Le mot de passe doit faire au moins 6 caractères.', 'error');
+    shakeField('r-password');
+    return;
   }
 
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span>';
+  btn.disabled     = true;
+  btn.innerHTML    = '<span class="spin"></span>';
 
   try {
-    const res  = await fetch(`${API}/api/auth/register`, {
-      method: 'POST',
+    const res  = await fetch(`${API_BASE}/api/auth/register`, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+      body:    JSON.stringify(data),
     });
-    const data = await res.json();
+    const json = await res.json();
+
     if (!res.ok) {
-      showAlert('register-alert', data.detail || 'Erreur inscription.', 'error');
+      showAlert('register-alert', json.detail || "Erreur lors de l'inscription.", 'error');
     } else {
-      showAlert('register-alert', '✅ Compte créé ! Connectez-vous.', 'success');
-      // pré-remplir le login
-      document.getElementById('l-username').value = body.username;
-      setTimeout(() => switchTab('login'), 1600);
+      showAlert('register-alert', '✅ Compte créé avec succès ! Connectez-vous.', 'success');
+      document.getElementById('l-username').value = data.username;
+      setTimeout(() => switchTab('login'), 1800);
     }
   } catch {
-    showAlert('register-alert', '❌ Serveur inaccessible.', 'error');
+    showAlert('register-alert', '❌ Serveur inaccessible. Veuillez réessayer.', 'error');
   } finally {
-    btn.disabled = false;
-    btn.textContent = 'Créer mon compte';
+    btn.disabled     = false;
+    btn.textContent  = 'Créer mon compte';
   }
 }
 
-// ── LOGIN ─────────────────────────────
+/* ── CONNEXION ───────────────────────────────── */
 async function doLogin() {
-  const btn  = document.getElementById('login-btn');
+  const btn   = document.getElementById('login-btn');
   const uname = document.getElementById('l-username').value.trim();
   const pass  = document.getElementById('l-password').value;
 
   if (!uname || !pass) {
-    showAlert('login-alert', 'Veuillez remplir tous les champs.', 'error'); return;
+    showAlert('login-alert', 'Veuillez remplir tous les champs.', 'error');
+    return;
   }
 
-  btn.disabled = true;
+  btn.disabled  = true;
   btn.innerHTML = '<span class="spin"></span>';
 
   try {
-    const res  = await fetch(`${API}/api/auth/login`, {
-      method: 'POST',
+    const res  = await fetch(`${API_BASE}/api/auth/login`, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: uname, password: pass })
+      body:    JSON.stringify({ username: uname, password: pass }),
     });
-    const data = await res.json();
+    const json = await res.json();
 
     if (!res.ok) {
-      showAlert('login-alert', data.detail || 'Identifiants incorrects.', 'error');
+      showAlert('login-alert', json.detail || 'Identifiants incorrects.', 'error');
+      shakeField('l-password');
     } else {
-      token = data.access_token;
+      /* Décodage du token JWT */
+      session.token = json.access_token;
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        userId = parseInt(payload.sub) || 1;
-      } catch { userId = 1; }
-      username = uname;
-      localStorage.setItem('rd_token', token);
-      localStorage.setItem('rd_uid',   userId);
-      localStorage.setItem('rd_user',  username);
+        const payload = JSON.parse(atob(session.token.split('.')[1]));
+        session.userId = parseInt(payload.sub) || 1;
+      } catch {
+        session.userId = 1;
+      }
+      session.username = uname;
+
+      localStorage.setItem('rd_token', session.token);
+      localStorage.setItem('rd_uid',   session.userId);
+      localStorage.setItem('rd_user',  session.username);
+
+      hideAlert('login-alert');
       openChat();
     }
   } catch {
-    showAlert('login-alert', '❌ Serveur inaccessible.', 'error');
+    showAlert('login-alert', '❌ Serveur inaccessible. Veuillez réessayer.', 'error');
   } finally {
-    btn.disabled = false;
+    btn.disabled    = false;
     btn.textContent = 'Se connecter';
   }
 }
 
-// ── OPEN CHAT ─────────────────────────
+/* ── OUVERTURE DU CHAT ───────────────────────── */
 function openChat() {
   document.getElementById('auth-screen').classList.remove('active');
   document.getElementById('chat-screen').classList.add('active');
-  document.getElementById('user-name').textContent = username;
-  document.getElementById('user-av').textContent   = (username[0] || 'U').toUpperCase();
+  document.getElementById('user-name').textContent = session.username;
+  document.getElementById('user-av').textContent   = (session.username[0] || 'U').toUpperCase();
   setWelcomeTime();
   document.getElementById('msg-input').focus();
 }
 
-// ── LOGOUT ────────────────────────────
+/* ── DÉCONNEXION ─────────────────────────────── */
 function doLogout() {
   localStorage.removeItem('rd_token');
   localStorage.removeItem('rd_uid');
   localStorage.removeItem('rd_user');
-  token = null; userId = 0; username = '';
+
+  session.token    = null;
+  session.userId   = 0;
+  session.username = '';
+
   document.getElementById('chat-screen').classList.remove('active');
   document.getElementById('auth-screen').classList.add('active');
   resetMessages();
 }
 
+/* ── RÉINITIALISATION DES MESSAGES ──────────────
+   AMÉLIORATION: Factorisation propre avec le nouveau BOT_AVATAR
+*/
 function resetMessages() {
   const box = document.getElementById('messages');
   box.innerHTML = `
     <div class="welcome">
       <div class="welcome-time" id="welcome-time">Aujourd'hui</div>
       <h2>Bonjour, comment puis-je vous aider ?</h2>
-      <p>Je suis Rèdè, votre assistant IA personnel</p>
+      <p>Je suis <strong style="color:var(--accent);font-family:'Syne',sans-serif;">${BOT_NAME}</strong>, votre chatbot personnel</p>
     </div>
     <div class="msg-row">
-      <div class="msg-av bot">AI</div>
+      <div class="msg-av bot" aria-hidden="true">${BOT_AVATAR}</div>
       <div class="msg-body">
-        <div class="msg-meta">Rèdè</div>
+        <div class="msg-meta">${BOT_NAME}</div>
         <div class="msg-bubble bot">👋 Bienvenue ! Posez-moi vos questions, je suis là pour vous aider.</div>
       </div>
-    </div>`;
+    </div>
+  `;
   setWelcomeTime();
 }
 
-// ── CHIPS ─────────────────────────────
+/* ── CHIPS DE SUGGESTION ─────────────────────── */
 function useChip(text) {
   const input = document.getElementById('msg-input');
   input.value = text;
   input.focus();
-  resize(input);
+  resizeTextarea(input);
 }
 
-// ── AUTO-RESIZE ───────────────────────
-function resize(el) {
+/* ── AUTO-RESIZE DU TEXTAREA ─────────────────── */
+function resizeTextarea(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
-document.getElementById('msg-input').addEventListener('input', function() { resize(this); });
 
-// ── SEND ──────────────────────────────
+document.getElementById('msg-input').addEventListener('input', function () {
+  resizeTextarea(this);
+});
+
+/* ── ENVOI DE MESSAGE ────────────────────────── 
+   AMÉLIORATION: Vérification anti-double-envoi
+   avec une flag isSending
+*/
+let isSending = false;
+
 async function sendMsg() {
+  if (isSending) return;
+
   const input = document.getElementById('msg-input');
   const msg   = input.value.trim();
   if (!msg) return;
 
+  isSending = true;
   addMsg(msg, 'user');
   input.value = '';
-  resize(input);
+  resizeTextarea(input);
 
-  const tid = addTyping();
+  const typingId = addTyping();
   document.getElementById('send-btn').disabled = true;
 
   try {
-    const res  = await fetch(`${API}/api/chat`, {
-      method: 'POST',
+    const res = await fetch(`${API_BASE}/api/chat`, {
+      method:  'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${session.token}`,
       },
-      body: JSON.stringify({ user_id: userId, message: msg })
+      body: JSON.stringify({
+        user_id: session.userId,
+        message: msg,
+      }),
     });
 
-    removeTyping(tid);
+    removeTyping(typingId);
 
-    if (res.status === 401) { doLogout(); return; }
+    /* Token expiré → déconnexion automatique */
+    if (res.status === 401) {
+      doLogout();
+      return;
+    }
 
     const data = await res.json();
     addMsg(data.response || data.detail || 'Erreur inattendue.', 'bot');
   } catch {
-    removeTyping(tid);
-    addMsg('❌ Impossible de contacter le serveur.', 'bot');
+    removeTyping(typingId);
+    addMsg('❌ Impossible de contacter le serveur. Vérifiez votre connexion.', 'bot');
   } finally {
     document.getElementById('send-btn').disabled = false;
+    isSending = false;
   }
 }
 
-// ── ADD MESSAGE ───────────────────────
+/* ── AJOUT D'UN MESSAGE ──────────────────────── */
 function addMsg(text, type) {
-  const box  = document.getElementById('messages');
-  const row  = document.createElement('div');
+  const box = document.getElementById('messages');
+
+  const row    = document.createElement('div');
   row.className = `msg-row ${type === 'user' ? 'user' : ''}`;
 
-  const av   = document.createElement('div');
-  av.className = `msg-av ${type === 'user' ? 'me' : 'bot'}`;
-  av.textContent = type === 'user' ? (username[0] || 'U').toUpperCase() : 'AI';
+  const av        = document.createElement('div');
+  av.className    = `msg-av ${type === 'user' ? 'me' : 'bot'}`;
+  av.textContent  = type === 'user'
+    ? (session.username[0] || 'U').toUpperCase()
+    : BOT_AVATAR;
+  av.setAttribute('aria-hidden', 'true');
 
-  const body = document.createElement('div');
-  body.className = 'msg-body';
+  const body       = document.createElement('div');
+  body.className   = 'msg-body';
 
-  const meta = document.createElement('div');
-  meta.className = 'msg-meta';
-  meta.textContent = type === 'user' ? username : 'Rèdè';
+  const meta       = document.createElement('div');
+  meta.className   = 'msg-meta';
+  meta.textContent = type === 'user' ? session.username : BOT_NAME;
 
-  const bubble = document.createElement('div');
-  bubble.className = `msg-bubble ${type === 'user' ? 'user' : 'bot'}`;
+  const bubble       = document.createElement('div');
+  bubble.className   = `msg-bubble ${type === 'user' ? 'user' : 'bot'}`;
   bubble.textContent = text;
 
   body.appendChild(meta);
@@ -1078,19 +1575,27 @@ function addMsg(text, type) {
   box.scrollTop = box.scrollHeight;
 }
 
-// ── TYPING ────────────────────────────
+/* ── INDICATEUR DE FRAPPE ────────────────────── */
 function addTyping() {
-  const id  = 'ty' + Date.now();
+  const id  = `ty_${Date.now()}`;
   const box = document.getElementById('messages');
-  const row = document.createElement('div');
-  row.className = 'msg-row';
-  row.id = id;
-  row.innerHTML = `
-    <div class="msg-av bot">AI</div>
+
+  const row      = document.createElement('div');
+  row.className  = 'msg-row';
+  row.id         = id;
+  row.setAttribute('aria-label', `${BOT_NAME} est en train d'écrire`);
+  row.innerHTML  = `
+    <div class="msg-av bot" aria-hidden="true">${BOT_AVATAR}</div>
     <div class="msg-body">
-      <div class="msg-meta">Rèdè</div>
-      <div class="msg-bubble bot"><div class="typing-wrap"><span></span><span></span><span></span></div></div>
-    </div>`;
+      <div class="msg-meta">${BOT_NAME}</div>
+      <div class="msg-bubble bot">
+        <div class="typing-wrap" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  `;
+
   box.appendChild(row);
   box.scrollTop = box.scrollHeight;
   return id;
@@ -1101,18 +1606,27 @@ function removeTyping(id) {
   if (el) el.remove();
 }
 
-// ── KEYBOARD ──────────────────────────
+/* ── RACCOURCIS CLAVIER ──────────────────────── */
 document.getElementById('msg-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMsg();
+  }
 });
 
-['l-username','l-password'].forEach(id =>
-  document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); })
-);
+/* Entrée sur connexion */
+['l-username', 'l-password'].forEach(id => {
+  document.getElementById(id)?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+});
 
-['r-username','r-nom','r-prenom','r-email','r-password'].forEach(id =>
-  document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); })
-);
+/* Entrée sur inscription */
+['r-username', 'r-nom', 'r-prenom', 'r-email', 'r-password'].forEach(id => {
+  document.getElementById(id)?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doRegister();
+  });
+});
 </script>
 </body>
 </html>
