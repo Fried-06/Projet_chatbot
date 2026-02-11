@@ -3,3 +3,11 @@ uvicorn[standard]
 python-dotenv
 pydantic
 google-genai
+SQLAlchemy
+alembic 
+psycopg2-binary
+python-jose
+cryptography
+passlib[bcrypt]
+python-jose[cryptography]
+pydantic[email]
