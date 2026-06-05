@@ -2,15 +2,16 @@ from app.memory.conversation import get_conversation, add_message
 from google import genai
 from google.genai import types
 from app.core.config import settings
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
-def generate_response(db: Session, user_id: int, user_message: str) -> str:
-    try:
-        add_message(db, user_id, "user", user_message)
 
-        conversation = get_conversation(db, user_id)
+async def generate_response(db: AsyncSession, user_id: int, user_message: str) -> str:
+    try:
+        await add_message(db, user_id, "user", user_message)
+
+        conversation = await get_conversation(db, user_id)
 
         # Construire l'historique (sans le dernier message)
         history = []
@@ -39,7 +40,7 @@ def generate_response(db: Session, user_id: int, user_message: str) -> str:
         )
 
         response_text = response.text.strip()
-        add_message(db, user_id, "assistant", response_text)
+        await add_message(db, user_id, "assistant", response_text)
         return response_text
 
     except Exception as e:

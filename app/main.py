@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.api import chat, auth
 from fastapi.middleware.cors import CORSMiddleware
 
+
 app = FastAPI(title="Chatbot API", version="1.0.0")
 
 app.add_middleware(
