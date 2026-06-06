@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Nexus — Votre chatbot intelligent propulsé par WYD">
+<title>Nexus — Chatbot</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     ÉCRAN D'AUTHENTIFICATION
+══════════════════════════════════ -->
+<div class="screen active" id="auth-screen" role="main">
+  <div class="auth-container">
+
+    <div class="auth-theme-toggle">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème" aria-label="Basculer le thème">
+        <svg class="sun" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="moon" width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="auth-brand">
+      <div class="brand-icon">
+        <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+      </div>
+      <h1><span class="nexus-n">N</span>exus</h1>
+      <p>Votre chatbot intelligent propulsé par WYD</p>
+    </div>
+
+    <div class="auth-card">
+      <div class="tabs" role="tablist">
+        <button class="tab active" id="tab-login" onclick="switchTab('login')"
+          role="tab" aria-selected="true" aria-controls="form-login">Connexion</button>
+        <button class="tab" id="tab-register" onclick="switchTab('register')"
+          role="tab" aria-selected="false" aria-controls="form-register">Inscription</button>
+      </div>
+
+      <div id="form-login" role="tabpanel">
+        <div class="form-group">
+          <label for="l-username">Nom d'utilisateur</label>
+          <input type="text" id="l-username" placeholder="david123" autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label for="l-password">Mot de passe</label>
+          <input type="password" id="l-password" placeholder="••••••••" autocomplete="current-password"/>
+        </div>
+        <button class="btn-primary" id="login-btn" onclick="doLogin()">Se connecter</button>
+        <div class="form-alert" id="login-alert" role="alert" aria-live="polite"></div>
+      </div>
+
+      <div id="form-register" style="display:none" role="tabpanel">
+        <div class="form-group">
+          <label for="r-username">Nom d'utilisateur</label>
+          <input type="text" id="r-username" placeholder="david123" autocomplete="username"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="r-nom">Nom</label>
+            <input type="text" id="r-nom" placeholder="Dupont" autocomplete="family-name"/>
+          </div>
+          <div class="form-group">
+            <label for="r-prenom">Prénom</label>
+            <input type="text" id="r-prenom" placeholder="David" autocomplete="given-name"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="r-email">Email</label>
+          <input type="email" id="r-email" placeholder="vous@exemple.com" autocomplete="email"/>
+        </div>
+        <div class="form-group">
+          <label for="r-password">Mot de passe
+            <span style="color:var(--text3);font-weight:400;font-size:10px;font-family:'DM Sans',sans-serif;text-transform:none;letter-spacing:0;">(min. 6 car.)</span>
+          </label>
+          <input type="password" id="r-password" placeholder="••••••••" autocomplete="new-password"/>
+        </div>
+        <button class="btn-primary" id="register-btn" onclick="doRegister()">Créer mon compte</button>
+        <div class="form-alert" id="register-alert" role="alert" aria-live="polite"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ÉCRAN DE CHAT
+══════════════════════════════════ -->
+<div class="screen" id="chat-screen">
+
+  <!-- Header -->
+  <header class="chat-header" role="banner">
+    <div class="hd-left">
+      <button id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Menu conversations">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <div class="hd-icon">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="hd-title"><span class="nexus-n">N</span>exus</div>
+        <div class="hd-session-title" id="hd-session-title">Sélectionnez une conversation</div>
+      </div>
+    </div>
+
+    <div class="hd-right">
+      <div class="user-chip">
+        <div class="user-av" id="user-av">D</div>
+        <span class="user-label" id="user-name">david</span>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Basculer le thème">
+        <svg class="sun" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="moon" width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+        </svg>
+      </button>
+      <button class="icon-btn danger" onclick="doLogout()" aria-label="Se déconnecter">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Body : sidebar + chat -->
+  <div class="chat-body">
+
+    <!-- Overlay mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Conversations">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="s-icon">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+            </svg>
+          </div>
+          <span class="s-title"><span class="nexus-n">N</span>exus</span>
+        </div>
+        <button class="btn-new-chat" onclick="newChat()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          Nouvelle conversation
+        </button>
+      </div>
+
+      <div class="sidebar-sessions" id="sessions-list">
+        <div class="sessions-empty">
+          <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+          </svg>
+          <p>Aucune conversation.<br>Créez-en une !</p>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="s-user-av" id="s-user-av">D</div>
+          <div class="s-user-info">
+            <div class="s-user-name" id="s-user-name">david</div>
+            <div class="s-user-role">Utilisateur</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Zone principale -->
+    <div class="chat-main">
+      <div id="messages" role="log" aria-label="Conversation" aria-live="polite">
+        <div class="welcome">
+          <div class="welcome-time" id="welcome-time">Aujourd'hui</div>
+          <h2>Bonjour, comment puis-je vous aider ?</h2>
+          <p>Je suis <strong style="color:var(--accent);font-family:'Syne',sans-serif;">Nexus</strong>, votre chatbot personnel</p>
+        </div>
+        <div class="msg-row">
+          <div class="msg-av bot">NX</div>
+          <div class="msg-body">
+            <div class="msg-meta">Nexus</div>
+            <div class="msg-bubble bot">👋 Bienvenue ! Créez ou sélectionnez une conversation dans la barre latérale pour commencer.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <div class="chips" role="group" aria-label="Suggestions rapides">
+          <button class="chip" onclick="useChip('Quelles sont tes capacités ?')">💡 Capacités</button>
+          <button class="chip" onclick="useChip('Aide-moi à rédiger un email professionnel')">✍️ Rédaction</button>
+          <button class="chip" onclick="useChip('Explique-moi un concept technique')">📚 Expliquer</button>
+          <button class="chip" onclick="useChip('Génère des idées créatives sur un sujet')">🎨 Idées</button>
+          <button class="chip" onclick="useChip('Résume ce texte en 3 points clés')">📋 Résumé</button>
+        </div>
+        <div class="input-row">
+          <textarea id="msg-input" rows="1"
+            placeholder="Écrivez votre message à Nexus…"
+            aria-label="Message à envoyer"
+            autocomplete="off"
+            enterkeyhint="send"></textarea>
+          <button id="send-btn" onclick="sendMsg()" aria-label="Envoyer">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+          </button>
+        </div>
+        <div class="input-hint"><kbd>Enter</kbd> pour envoyer · <kbd>Shift+Enter</kbd> pour nouvelle ligne</div>
+      </div>
+
+      <footer class="chat-footer" role="contentinfo">
+        <div class="footer-text">
+          Propulsé par <span class="footer-dot"></span> <span class="footer-brand">WYD</span>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+import { switchTab as _switchTab, doRegister as _doRegister, doLogin as _doLogin, doLogout as _doLogout } from './js/auth.js';
+import { toggleSidebar as _toggleSidebar, closeSidebar as _closeSidebar, loadSessions, createNewSession, setActiveSession } from './js/sidebar.js';
+import { sendMsg as _sendMsg, loadHistory, resetMessages, resizeTextarea, useChip as _useChip, setWelcomeTime } from './js/chat.js';
+
+const API_BASE = 'http://localhost:8000';
+
+const session = {
+  token:    localStorage.getItem('rd_token') || null,
+  userId:   parseInt(localStorage.getItem('rd_uid') || '0'),
+  username: localStorage.getItem('rd_user') || '',
+};
+
+// Exposer la session globalement pour chat.js
+window.__session = session;
+
+/* ── Fonctions globales (appelées depuis le HTML) ── */
+window.toggleTheme   = toggleTheme;
+window.switchTab     = (t) => _switchTab(t);
+window.doRegister    = () => _doRegister(API_BASE, null);
+window.doLogin       = () => _doLogin(API_BASE, session, openChat);
+window.doLogout      = () => _doLogout(session, closeChat);
+window.toggleSidebar = _toggleSidebar;
+window.closeSidebar  = _closeSidebar;
+window.newChat       = () => createNewSession(API_BASE, session, onSelectSession);
+window.sendMsg       = () => _sendMsg(API_BASE, session);
+window.useChip       = _useChip;
+
+/* ── Init ── */
+(function init() {
+  const savedTheme = localStorage.getItem('rd_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (session.token) openChat();
+  setWelcomeTime();
+
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    const setVh = () => document.documentElement.style.setProperty('--real-vh', `${window.innerHeight * 0.01}px`);
+    setVh();
+    window.addEventListener('resize', setVh);
+  }
+})();
+
+/* ── Thème ── */
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('rd_theme', next);
+}
+
+/* ── Ouvrir le chat ── */
+async function openChat() {
+  document.getElementById('auth-screen').classList.remove('active');
+  document.getElementById('chat-screen').classList.add('active');
+  document.getElementById('user-name').textContent   = session.username;
+  document.getElementById('user-av').textContent     = (session.username[0] || 'U').toUpperCase();
+  document.getElementById('s-user-name').textContent = session.username;
+  document.getElementById('s-user-av').textContent   = (session.username[0] || 'U').toUpperCase();
+  setWelcomeTime();
+
+  // Un seul fetch — loadSessions gère tout
+  try {
+    const res = await fetch(`${API_BASE}/api/sessions`, {
+      headers: { 'Authorization': `Bearer ${session.token}` }
+    });
+
+    // Token expiré → forcer déconnexion
+    if (res.status === 401) {
+      console.warn('Token expiré, déconnexion forcée');
+      _doLogout(session, closeChat);
+      return;
+    }
+
+    const sessions = await res.json();
+
+    if (!Array.isArray(sessions) || sessions.length === 0) {
+      // Aucune session → créer automatiquement la première (1 seul POST)
+      await createNewSession(API_BASE, session, onSelectSession);
+    } else {
+      // Alimenter la sidebar avec les données déjà récupérées (pas de 2e GET)
+      renderSessionsInSidebar(sessions);
+      // Ouvrir la plus récente
+      await onSelectSession(sessions[0].id, sessions[0].titre);
+    }
+  } catch (e) {
+    console.error('Erreur openChat:', e);
+  }
+
+  document.getElementById('msg-input').focus();
+}
+
+/* ── Alimenter la sidebar sans refaire de fetch ── */
+function renderSessionsInSidebar(sessions) {
+  const container = document.getElementById('sessions-list');
+  container.innerHTML = `<div class="sessions-label">Conversations</div>`;
+  sessions.forEach(s => {
+    const date    = new Date(s.updated_at);
+    const diff    = Date.now() - date;
+    const mins    = Math.floor(diff / 60000);
+    const hrs     = Math.floor(diff / 3600000);
+    const days    = Math.floor(diff / 86400000);
+    let dateStr;
+    if (mins < 1)        dateStr = "À l'instant";
+    else if (mins < 60)  dateStr = `Il y a ${mins} min`;
+    else if (hrs  < 24)  dateStr = `Il y a ${hrs}h`;
+    else if (days === 1) dateStr = "Hier";
+    else if (days < 7)   dateStr = `Il y a ${days}j`;
+    else dateStr = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+
+    const esc = str => str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const item = document.createElement('div');
+    item.className  = 'session-item';
+    item.dataset.id = s.id;
+    item.innerHTML  = `
+      <div class="session-icon">
+        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+      </div>
+      <div class="session-info">
+        <div class="session-title">${esc(s.titre)}</div>
+        <div class="session-date">${dateStr}</div>
+      </div>`;
+    item.addEventListener('click', () => onSelectSession(s.id, s.titre));
+    container.appendChild(item);
+  });
+}
+
+/* ── Fermer le chat ── */
+function closeChat() {
+  document.getElementById('chat-screen').classList.remove('active');
+  document.getElementById('auth-screen').classList.add('active');
+  resetMessages();
+}
+
+/* ── Sélectionner une session ── */
+async function onSelectSession(sessionId, titre) {
+  if (!sessionId) {
+    resetMessages();
+    document.getElementById('hd-session-title').textContent = 'Sélectionnez une conversation';
+    return;
+  }
+  setActiveSession(sessionId);
+  document.getElementById('hd-session-title').textContent = titre || 'Conversation';
+  await loadHistory(API_BASE, session.token, sessionId);
+  document.getElementById('msg-input').focus();
+}
+
+/* ── Raccourcis clavier ── */
+document.getElementById('msg-input').addEventListener('input', function () {
+  resizeTextarea(this);
+});
+
+document.getElementById('msg-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.sendMsg(); }
+});
+
+['l-username', 'l-password'].forEach(id => {
+  document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
+});
+
+['r-username', 'r-nom', 'r-prenom', 'r-email', 'r-password'].forEach(id => {
+  document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') window.doRegister(); });
+});
+</script>
+</body>
+</html>

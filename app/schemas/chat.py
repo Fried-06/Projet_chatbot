@@ -1,41 +1,64 @@
 from pydantic import BaseModel, Field, EmailStr
+from datetime import datetime
 
+
+# ── Chat ──────────────────────────────────────────────────
 
 class ChatRequest(BaseModel):
-    user_id: int
-    message: str = Field(..., 
-                         min_length=1,
-                         max_length=3000,
-                         description="The message sent by the user to the chatbot."
-                        )
+    session_id: int
+    message: str = Field(..., min_length=1, max_length=3000)
 
 
 class ChatResponse(BaseModel):
-    response: str   
+    response: str
+
+
+# ── Sessions ──────────────────────────────────────────────
+
+class SessionCreate(BaseModel):
+    titre: str = "Nouvelle conversation"
+
+
+class SessionUpdate(BaseModel):
+    titre: str
+
+
+class SessionResponse(BaseModel):
+    id: int
+    titre: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+# ── Auth ──────────────────────────────────────────────────
 
 class UserCreate(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50, description="The user's username, must be between 3 and 50 characters long.")
-    nom : str = Field(..., min_length=1, max_length=100, description="The user's full name.")
-    prenom : str = Field(..., min_length=1, max_length=100, description="The user's full name.")
+    username: str = Field(..., min_length=3, max_length=50)
+    nom: str = Field(..., min_length=1, max_length=100)
+    prenom: str = Field(..., min_length=1, max_length=100)
     email: EmailStr
-    password: str = Field(..., min_length=6, description="The user's password, must be at least 6 characters long.")
+    password: str = Field(..., min_length=6)
+
 
 class UserLogin(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50, description="The user's username, must be between 3 and 50 characters long.")
-    password: str = Field(..., min_length=6, description="The user's password, must be at least 6 characters long.")
+    username: str = Field(..., min_length=3, max_length=50)
+    password: str = Field(..., min_length=6)
 
 
 class UserResponse(BaseModel):
     id: int
     username: str
     email: EmailStr
-    nom : str
-    prenom : str
+    nom: str
+    prenom: str
 
     class Config:
-        form_attributes = True
+        from_attributes = True
 
 
 class Token(BaseModel):
     access_token: str
-    token_type: str 
+    token_type: str

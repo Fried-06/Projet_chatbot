@@ -8,11 +8,11 @@ import asyncio
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
 
-async def generate_response(db: AsyncSession, user_id: int, user_message: str) -> str:
+async def generate_response(db: AsyncSession, user_id: int, session_id: int, user_message: str) -> str:
     try:
-        await add_message(db, user_id, "user", user_message)
+        await add_message(db, user_id, session_id, "user", user_message)
 
-        conversation = await get_conversation(db, user_id)
+        conversation = await get_conversation(db, session_id)
 
         # Construire l'historique (sans le dernier message)
         history = []
@@ -25,7 +25,6 @@ async def generate_response(db: AsyncSession, user_id: int, user_message: str) -
                 )
             )
 
-        # Créer le chat et envoyer le message
         chat = client.chats.create(
             model=settings.GEMINI_MODEL,
             history=history
@@ -51,7 +50,7 @@ async def generate_response(db: AsyncSession, user_id: int, user_message: str) -
                     raise
 
         response_text = response.text.strip()
-        await add_message(db, user_id, "assistant", response_text)
+        await add_message(db, user_id, session_id, "assistant", response_text)
         return response_text
 
     except Exception as e:
